@@ -5,6 +5,8 @@ import os
 import requests
 from dotenv import load_dotenv
 from colorama import Fore, init
+from dotenv import load_dotenv
+
 
 init(autoreset=True)
 
@@ -26,7 +28,7 @@ print("[*] 1 minute [*]")
 @client.event
 async def on_ready():
     print("[!] Ready [!]")
-#    majserv.start()
+    #majserver.start()
 
 #Scrapping de l'invitation + join
 @client.event
@@ -53,8 +55,5 @@ async def on_message(ctx):
             print(Fore.RED + "You are banned from the discord")
         else:
             print("Error")
-
-#@tasks.loop(seconds=2)
-#async def majserv():
 
 client.run(TOKEN, bot=False)
