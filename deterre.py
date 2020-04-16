@@ -3,6 +3,7 @@ import discord
 import re
 import os
 import requests
+from dotenv import load_dotenv
 from colorama import Fore, init
 
 init(autoreset=True)
@@ -10,10 +11,9 @@ init(autoreset=True)
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-JMINC = os.getenv('DISCORD_JMINC')
 
 client = commands.Bot(command_prefix=".", self_bot=True)
-
+#guilds = client.fetch_guilds(limit=100).flatten()
 lst_server = []
 lst_user = []
 
@@ -26,7 +26,7 @@ print("[*] 1 minute [*]")
 @client.event
 async def on_ready():
     print("[!] Ready [!]")
-    majserver.start()
+#    majserv.start()
 
 #Scrapping de l'invitation + join
 @client.event
@@ -40,6 +40,11 @@ async def on_message(ctx):
                 response_json = request.json()
                 server_name = response_json["guild"]["name"]
                 print(Fore.GREEN + f"Joined the server {server_name}")
+                #guilds = client.guilds                
+                server_id=response_json["guild"]["id"]
+                #server_member=client.guilds(id=server_id).member
+                
+                print(server_name, server_id)
             except KeyError:
                 print(Fore.LIGHTBLACK_EX + "Couldn't join the server")
         elif "Maximum number of guilds reached" in request.text:
@@ -49,7 +54,7 @@ async def on_message(ctx):
         else:
             print("Error")
 
-@tasks.loop(seconds=10)
-async def majserver():
-                
+#@tasks.loop(seconds=2)
+#async def majserv():
+
 client.run(TOKEN, bot=False)
