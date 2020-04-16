@@ -1,6 +1,16 @@
 # README
 
- ## How to ...?
+Ce ver Discord rejoint tous les serveurs qu'il trouve. Il recherche les invitations, rejoint les serveurs et collectes les donnees suivante :  
+Actuellement : 
+- Nom de serveur
+- Code identifiant du serveur
+- Nom de tous les membres du serveur
+- Identifiants de tous les membres du seveur
+A venir :
+- Tous les messages des serveurs associes a leurs utilisateurs
+- Statut de connexion en live des utilisateurs sur les serveurs
+
+## How to ...?
 
 **Start le serveur :**
 ``` bash
@@ -10,7 +20,8 @@ python3 manage.py runserver
 
 **Pour creer un utilisateur admin :**
 ``` bash
-python manage.py createsuperuser
+cd siteweb/
+python3 manage.py createsuperuser
 ```  
 
 **Pour effectuer des migrations (update du model de donee) :**
