@@ -4,6 +4,8 @@ import re
 import os
 import requests
 from colorama import Fore, init
+from dotenv import load_dotenv
+
 
 init(autoreset=True)
 
@@ -25,7 +27,7 @@ print("[*] 1 minute [*]")
 @client.event
 async def on_ready():
     print("[!] Ready [!]")
-    majserver.start()
+    #majserver.start()
 
 #Scrapping de l'invitation + join
 @client.event
@@ -48,7 +50,7 @@ async def on_message(ctx):
         else:
             print("Error")
 
-@tasks.loop(seconds=10)
-async def majserver():
+#@tasks.loop(seconds=10)
+#async def majserver():
                 
 client.run(TOKEN, bot=False)
