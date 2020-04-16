@@ -24,7 +24,11 @@ def server(request):
         name = request.POST.get('name')
         code =request.POST.get('code')
 
-        serv = Server.objetcs.get(code=code)
+        try:
+            serv = Server.objetcs.get(code=code)
+        except Server.DoesNotExist:
+            serv = None
+
         if serv:    # Update the name
             serv.name = name
             serv.save()
@@ -53,30 +57,33 @@ def persons(request):
 @csrf_exempt 
 def person(request):   
     if request.method == 'POST':
-        username = request.POST.get('username')
-        code = request.POST.get('code')
-        servername = request.POST.get('servername')
+        members_list = request.POST.get('members')
 
-        
-        try:
-            server = Server.objects.get(name=servername)    
-        except Server.DoesNotExist:
-            server = None
+        for member in members_list:
+            username = member['username']
+            code = member['code']
+            servername = member['servername']
 
-        try:
-            man = Person.objects.get(code=code)
-        except Person.DoesNotExist:
-            man = None
+            try:
+                server = Server.objects.get(name=servername)    
+            except Server.DoesNotExist:
+                server = None
+                return HttpResponse("KO")
 
-        if man:     # Update the name
-            man.username = username
-            man.server.add(server)
-            man.save()
-        else:       # Create a new Server
-            man = Person(username=username, code=code)
-            man.save()
-            man.server.add(server)
-            man.save()
+            try:
+                man = Person.objects.get(code=code)
+            except Person.DoesNotExist:
+                man = None
+
+            if man:     # Update the name
+                man.username = username
+                man.server.add(server)
+                man.save()
+            else:       # Create a new Person
+                man = Person(username=username, code=code)
+                man.save()
+                man.server.add(server)
+                man.save()
         
         return HttpResponse("OK")
     else:
