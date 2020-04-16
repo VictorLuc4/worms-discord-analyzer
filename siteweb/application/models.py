@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Server(models.Model):
+    code = models.CharField(max_length=100, primary_key=True)
     name = models.CharField(max_length=100)
     
     class Meta:
@@ -12,9 +13,9 @@ class Server(models.Model):
         return self.name
 
 class Person(models.Model):
+    code = models.CharField(max_length=25, primary_key=True)
     server = models.ManyToManyField(Server)
     username = models.CharField(max_length=100)
-    code = models.CharField(max_length=25)
 
     class Meta:
         ordering = ['username']
