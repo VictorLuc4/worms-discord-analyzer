@@ -10,7 +10,6 @@ init(autoreset=True)
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-JMINC = os.getenv('DISCORD_JMINC')
 
 client = commands.Bot(command_prefix=".", self_bot=True)
 
