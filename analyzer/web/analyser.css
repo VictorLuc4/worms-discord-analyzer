@@ -1,0 +1,7 @@
+.container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 33% 33% 33%;
+    align-items: start;
+    justify-content: space-between;
+  }
