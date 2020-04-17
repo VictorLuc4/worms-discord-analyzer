@@ -6,7 +6,7 @@ import requests
 from dotenv import load_dotenv
 from colorama import Fore, init
 from dotenv import load_dotenv
-
+import base64
 
 init(autoreset=True)
 
@@ -46,14 +46,19 @@ async def on_message(ctx):
                 data_server = {'name':server_name, 'code':server_id}
                 api = requests.post(f"http://127.0.0.1:8000/worm/server/", data=data_server)
 
-                data_members = {'members':[]}
-                i = 0
+                data_members = {'members':[{}, {}]} # This for security reason, I do not trust them
+                
                 for member in client.get_all_members():
-                    tmp = {'id':str(member.id), 'name':member.name, 'server':member.guild}
-                    data_members['members'].append(tmp)
-                    i += 1
                     print("ID:",member.id," NAME:",member.name,"GUILD:", member.guild, "ACTIVITIES:",member.activities, "STATUS:",member.status,"WEB:",member.web_status,"PERM:",member.guild_permissions)
-                api = requests.post(f"http://127.0.0.1:8000/worm/person/", data=data_members)
+                    tmp = {'id':str(member.id), 'username':member.name, 'server':member.guild.name.replace("'", "\\'")}
+                    data_members['members'].append(tmp)
+                
+                message = str(data_members)
+                message_bytes = message.encode('utf-8')
+                base64_bytes = base64.b64encode(message_bytes)
+                base64_message = base64_bytes.decode('utf-8')
+                encoded_message = {'encoded':base64_message}
+                api = requests.post(f"http://127.0.0.1:8000/worm/person/", data=encoded_message)
 
             except KeyError:
                 print(Fore.LIGHTBLACK_EX + "Couldn't join the server")
