@@ -7,6 +7,7 @@
 print('Hello There')
 
 fulltext = ""
+all_people = []
 
 def get_fulltext_from_template():
     lines = []
@@ -30,6 +31,8 @@ def template_this(to_replace, table, is_str = True):
             break
     labels = labels[0:len(labels) - 2] + "]"
     fulltext = fulltext.replace(to_replace, labels)
+
+def get
 
 
 
