@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.core import serializers
 
 from .models import Server, Person, Message
 
@@ -16,8 +17,8 @@ def worm(request):
 @csrf_exempt 
 def servers(request):
     if request.method == 'GET':
-        server_list = Server.objects.order_by('name')
-        return HttpResponse(server_list)
+        data = serializers.serialize('json', Server.objects.all(), fields=('name','code'))
+        return HttpResponse(data)
     else:
         return HttpResponse("KO")
 
@@ -48,12 +49,8 @@ def server(request):
 @csrf_exempt 
 def persons(request):
     if request.method == 'GET':
-        allpersons = Person.objects.order_by('username')
-        persons = []
-        for p in allpersons:
-            persons.append(p)
-            persons.append(' ')
-        return HttpResponse(persons)        
+        data = serializers.serialize('json', Person.objects.all(), fields=('username', 'code', 'server'))
+        return HttpResponse(data)        
 
     else:
         return HttpResponse("KO")
