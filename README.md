@@ -13,11 +13,11 @@ A venir :
 ## Principe general
 
 L'ensemble du programme sera  en 3 parties :
-- Le scrappeur (en gros deterre.py)
+- Le ver (en gros deterre.py)
 - Le serveur (la partie django)
 - L'analyseur (une future partie)
 
-Le scrappeur : 
+Le ver : 
 - Recolte les datas sur discord et fait des requetes POST vers l'API django pour ajouter ce qu'il trouve en DB 
 
 Le serveur  : 
@@ -29,10 +29,11 @@ L'analyseur :
 - Fait des appels GET vers le serveur
 - Analyse et recoupe les datas
 - Genere des graphiques
+- *Cette pqrtie n'est pas encore live*
 
 ## How to ...?
 
-**Start le serveur :**
+**Lancer le serveur :**
 ``` bash
 cd siteweb/
 python3 manage.py runserver
@@ -49,6 +50,18 @@ python3 manage.py createsuperuser
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
+
+**Pour lancer le ver**
+- Ayez un compte discord avec un `DISCORD_TOKEN` qui permet d'utiliser les API
+- Lancez le serveur
+- Puis : 
+``` bash
+# Setup env
+export DISCORD_TOKEN=<your_token>
+
+python3 ver/deterre-v2.py
+```
+- Enfin lancez un premier lien d'invitation sur le serveur d'origin ou se trouve votre ver... Et c'est partit !
 
 # Contributeurs 
 

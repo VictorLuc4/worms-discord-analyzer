@@ -5,17 +5,17 @@ import os
 import requests
 from dotenv import load_dotenv
 from colorama import Fore, init
-from dotenv import load_dotenv
 import base64
 
 init(autoreset=True)
 
 
-load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+if TOKEN is None:
+    print('You need to set a DISCORD_TOKEN env variable')
+    exit()
 
 client = commands.Bot(command_prefix=".", self_bot=True)
-#guilds = client.fetch_guilds(limit=100).flatten()
 lst_server = []
 lst_user = []
 
@@ -28,7 +28,6 @@ print("[*] 1 minute [*]")
 @client.event
 async def on_ready():
     print("[!] Ready [!]")
-    #majserver.start()
 
 #Scrapping de l'invitation + join
 @client.event
@@ -40,6 +39,7 @@ async def on_message(ctx):
         if "name" in request.text:
             try:
                 response_json = request.json()
+                print(response_json)
                 server_name = response_json["guild"]["name"]
                 server_id=response_json["guild"]["id"]
 
