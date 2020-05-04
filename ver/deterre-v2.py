@@ -9,7 +9,7 @@ import base64
 
 init(autoreset=True)
 
-
+load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 if TOKEN is None:
     print('You need to set a DISCORD_TOKEN env variable')

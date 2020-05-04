@@ -58,6 +58,7 @@ python3 manage.py migrate
 ``` bash
 # Setup env
 export DISCORD_TOKEN=<your_token>
+# or edit ver/.env
 
 python3 ver/deterre-v2.py
 ```
