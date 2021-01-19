@@ -1,60 +1,57 @@
 # README
 
-Ce ver Discord rejoint tous les serveurs qu'il trouve. Il recherche les invitations, rejoint les serveurs et collectes les donnees suivante :  
-Actuellement : 
-- Nom de serveur
-- Code identifiant du serveur
-- Nom de tous les membres du serveur
-- Identifiants de tous les membres du seveur
-A venir :
-- Tous les messages des serveurs associes a leurs utilisateurs
-- Statut de connexion en live des utilisateurs sur les serveurs
+This discord `worm` join every server it found. To do that, the worm search in the new messages for invitations and also collect these data :
+  
+- Server name
+- ID Code of the server
+- Name and ID of the people and bots in the server
+Next to come :
+- Every messages associated to users
+- Tracking connection status
 
-## Principe general
+## General overview
 
-L'ensemble du programme sera  en 3 parties :
-- Le ver (en gros deterre.py)
-- Le serveur (la partie django)
-- L'analyseur (une future partie)
+This program has 3 parts : 
+- The worm (deterre.py)
+- The server (Django part)
+- The analyser (next to come)
 
-Le ver : 
-- Recolte les datas sur discord et fait des requetes POST vers l'API django pour ajouter ce qu'il trouve en DB 
+The worm : 
+- Collect data on discor and make POST requests to the django API to store what it found in a DB
 
-Le serveur  : 
-- Recoit les appels API et fait les modifications en DB 
-- A une interface d'admin pour pourvoir modifier / acceder aux data quand on le souhaite
-- Recoit des appels API GET et fournit les data de la DB 
+The server : 
+- Receive the API calls and perform modifications in DB
+- An admin interface on django is enable to modify / access the data 
 
-L'analyseur : 
-- Fait des appels GET vers le serveur
-- Analyse et recoupe les datas
-- Genere des graphiques
-- *Cette pqrtie n'est pas encore live*
+The analyser (not live yet):
+- Collect data from the server
+- Anaylse and transform the data
+- Create graphical views
 
 ## How to ...?
 
-**Lancer le serveur :**
+**Launch the server**
 ``` bash
 cd siteweb/
 python3 manage.py runserver
 ```
 
-**Pour creer un utilisateur admin :**
+**Create admin user:**
 ``` bash
 cd siteweb/
 python3 manage.py createsuperuser
 ```  
 
-**Pour effectuer des migrations (update du model de donee) :**
+**Make migration (to update the data model):**
 ``` bash
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-**Pour lancer le ver**
-- Ayez un compte discord avec un `DISCORD_TOKEN` qui permet d'utiliser les API
-- Lancez le serveur
-- Puis : 
+**Launch the worm:**
+- You need a discord account, get the `DISCORD_TOKEN`that allows you to use the API
+- Start the server
+- Then: 
 ``` bash
 # Setup env
 export DISCORD_TOKEN=<your_token>
@@ -62,7 +59,7 @@ export DISCORD_TOKEN=<your_token>
 
 python3 ver/deterre-v2.py
 ```
-- Enfin lancez un premier lien d'invitation sur le serveur d'origin ou se trouve votre ver... Et c'est partit !
+- FInally lanch a first invitation link on your root server where the worm is and... let's go !
 
 # Contributeurs 
 
